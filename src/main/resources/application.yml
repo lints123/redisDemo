@@ -1,0 +1,21 @@
+server:
+  servlet:
+    context-path: /redisDemo
+  port: 8080
+
+sys:
+  name : 张珊
+  phone : 13412123123
+spring:
+  redis:
+    database: 15
+#    host: 192.168.1.18
+    host: 127.0.0.1
+#    password: gentle888
+    port: 6379
+    jedis:
+      pool:
+        max-active: 8
+        min-idle: 0
+        max-idle: 8
+        max-wait: -1ms

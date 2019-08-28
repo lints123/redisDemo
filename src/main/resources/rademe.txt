@@ -1,0 +1,37 @@
+2019-08-26
+学习redisDemo
+1、使用Spring定义的RedisTemplate模板，定义redis抽象类，方法，新增，删除，获取
+2、定义常量在配置文件中使用
+3、学习RDB和AOP，具体在博客可见。以前以为是写在程序中，后面发现是在配置文件中定义即可
+
+2019-08-28
+1、windows服务器安装redis测试学习，简单的set，get，包括发送消息，客户端订阅消息
+   操作命令：
+   redis-lic.ext -h 127.0.0.1 -p 6379 【备注：windows的redis无密码，所以-p 后面为空格，有密码输入即可，这里是打开redis客户端操作命令窗口】
+   subscribe laowang 【redis操作命令端口操作，这里是订阅通道，表示当前客户端已经绑定了通道，服务端往通道扔消息，客户端就可以接收到】
+   publish laowang 123456 【redis操作命令端口操作，这里是服务端发送消息给通道名称为 laowang 的，消息为123456】
+之后所有与通道建立连接的客户端都会同一时间点收到消息
+
+【详细解释】
+127.0.0.1:6379> SUBSCRIBE channel1.1  绑定通道
+Reading messages... (press Ctrl-C to quit)
+1) "subscribe"  //"subscribe"表示订阅成功的信息
+2) "channel1.1" //表示订阅成功的频道
+3) (integer) 1  //表示当前订阅客户端的数量
+
+//当发布者发布消息时，订阅者会收到如下消息
+1) "message"    //表示接收到消息
+2) "channel1.1" //表示产生消息的频道
+3) "test"       //表示消息的内容
+
+//当订阅者取消订阅时会显示如下：
+127.0.0.1:6379> UNSUBSCRIBE channel1.1
+1) "unsubscribe"    //表示成功取消订阅
+2) "channel1.1" //表示取消订阅的频道
+3) (integer) 0  //表示当前订阅客户端的数量
+
+//注：在redis-cli中无法测试UNSUBSCRIBE命令
+
+注：
+redis客户端连接工具：https://redisdesktop.com/download
+redis详细介绍网站：https://www.cnblogs.com/huangjuncong/tag/redis/
